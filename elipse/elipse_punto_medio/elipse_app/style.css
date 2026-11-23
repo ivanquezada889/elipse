@@ -1,0 +1,361 @@
+:root {
+  --fondo: #140e1a;
+  --superficie: #1e1428;
+  --superficie-2: #271a35;
+  --borde: #3d2860;
+  --texto: #f0deff;
+  --texto-suave: #9b82c0;
+  --ambar: #ff9e2c;
+  --coral: #e8664f;
+  --menta: #e040fb;
+  --rejilla: #2a1a3a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  background: var(--fondo);
+  color: var(--texto);
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.barra {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 10px 16px;
+  background: var(--superficie);
+  border-bottom: 1px solid var(--borde);
+  flex-shrink: 0;
+}
+
+.marca {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.marca strong {
+  display: block;
+  font-size: 15px;
+  line-height: 1.2;
+}
+.marca small {
+  color: var(--texto-suave);
+  font-size: 12px;
+}
+.logo {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  background: var(--ambar);
+  color: var(--fondo);
+  font-size: 20px;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+.acciones-plano {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.acciones-plano button {
+  background: var(--superficie-2);
+  color: var(--texto);
+  border: 1px solid var(--borde);
+  border-radius: 8px;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  transition: border-color 0.15s, background-color 0.15s;
+}
+.acciones-plano button:hover {
+  border-color: var(--ambar);
+  background: var(--borde);
+}
+
+.cuerpo {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.lienzo-zona {
+  flex: 1;
+  position: relative;
+  min-width: 0;
+  min-height: 0;
+  background: var(--fondo);
+}
+
+canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  cursor: default;
+  display: block;
+}
+canvas.arrastrando {
+  cursor: default;
+}
+
+.pie {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 6px 12px;
+  background: rgba(36, 32, 25, 0.88);
+  backdrop-filter: blur(4px);
+  border-top: 1px solid var(--borde);
+  color: var(--texto-suave);
+  font-size: 11px;
+  pointer-events: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.panel {
+  width: clamp(300px, 32vw, 420px);
+  max-width: 100%;
+  flex-shrink: 0;
+  background: var(--superficie);
+  border-left: 1px solid var(--borde);
+  padding: 16px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.bloque {
+  background: var(--superficie-2);
+  border: 1px solid var(--borde);
+  border-radius: 12px;
+  padding: 14px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.bloque h3 {
+  margin: 0 0 10px;
+  font-size: 12px;
+  color: var(--ambar);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 700;
+}
+
+.fila-campos {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  width: 100%;
+}
+
+.fila-campos label {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  color: var(--texto-suave);
+  font-size: 12px;
+  font-weight: 600;
+  min-width: 0;
+}
+
+.fila-campos input {
+  background: var(--fondo);
+  color: var(--texto);
+  border: 1px solid var(--borde);
+  border-radius: 8px;
+  padding: 8px 6px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.fila-campos input:focus {
+  outline: none;
+  border-color: var(--ambar);
+  box-shadow: 0 0 0 2px rgba(240, 161, 58, 0.25);
+}
+
+.botones {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.botones button {
+  flex: 1;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 13px;
+  transition: opacity 0.15s ease, transform 0.1s ease;
+}
+.botones button:active {
+  transform: scale(0.98);
+}
+.primario {
+  background: var(--ambar);
+  color: var(--fondo);
+}
+.primario:hover {
+  background: #f7ad4d;
+}
+.secundario {
+  background: transparent;
+  color: var(--texto);
+  border: 1px solid var(--borde) !important;
+}
+.secundario:hover {
+  border-color: var(--texto-suave) !important;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.error {
+  color: var(--coral);
+  min-height: 16px;
+  margin: 8px 0 0;
+  font-size: 12px;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.chip {
+  background: var(--fondo);
+  color: var(--menta);
+  border: 1px solid var(--borde);
+  border-radius: 999px;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 500;
+  transition: border-color 0.15s, background-color 0.15s;
+}
+.chip:hover {
+  border-color: var(--menta);
+  background: rgba(127, 214, 176, 0.1);
+}
+
+.datos {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 13px;
+}
+.datos li {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 0;
+  border-bottom: 1px dashed var(--borde);
+  color: var(--texto-suave);
+}
+.datos li:last-child {
+  border-bottom: none;
+}
+.datos b {
+  color: var(--texto);
+  font-variant-numeric: tabular-nums;
+  font-size: 14px;
+}
+
+.tabla-bloque {
+  min-height: 180px;
+  display: flex;
+  flex-direction: column;
+}
+.tabla-scroll {
+  max-height: 240px;
+  overflow-y: auto;
+  border-radius: 8px;
+  border: 1px solid var(--borde);
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+th, td {
+  padding: 6px 8px;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+  font-size: 12px;
+}
+th {
+  position: sticky;
+  top: 0;
+  background: var(--superficie);
+  color: var(--ambar);
+  font-size: 12px;
+}
+td {
+  border-top: 1px solid var(--borde);
+}
+tbody tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+@media (max-width: 768px) {
+  .app {
+    height: 100vh;
+  }
+  .cuerpo {
+    flex-direction: column;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+  }
+  .lienzo-zona {
+    height: 360px;
+    min-height: 260px;
+    flex-shrink: 0;
+    width: 100%;
+  }
+  .panel {
+    width: 100%;
+    max-width: 100%;
+    border-left: none;
+    border-top: 1px solid var(--borde);
+    overflow-y: visible;
+    flex-shrink: 0;
+  }
+}

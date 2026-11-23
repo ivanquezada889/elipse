@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Elipse · Algoritmo del Punto Medio</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+
+  <header class="barra">
+    <div class="marca">
+      <span class="logo">⬭</span>
+      <div>
+        <strong>Trazador de Elipses</strong>
+        <small>Algoritmo del punto medio</small>
+      </div>
+    </div>
+    <nav class="acciones-plano">
+      <button id="zoomMas" title="Acercar">+</button>
+      <button id="zoomMenos" title="Alejar">−</button>
+      <button id="centrar" title="Centrar figura">Centrar figura</button>
+    </nav>
+  </header>
+
+  <div class="cuerpo">
+
+    <main class="lienzo-zona">
+      <canvas id="lienzo"></canvas>
+      <div class="pie" id="pie">X = — &nbsp;&nbsp; Y = —</div>
+    </main>
+
+    <aside class="panel">
+
+      <section class="bloque">
+        <h3>Parámetros</h3>
+        <div class="fila-campos">
+          <label>Xc<input type="number" id="xc" placeholder="0"></label>
+          <label>Yc<input type="number" id="yc" placeholder="0"></label>
+          <label>Rx<input type="number" id="rx" placeholder="0" min="1"></label>
+          <label>Ry<input type="number" id="ry" placeholder="0" min="1"></label>
+        </div>
+        <div class="botones">
+          <button class="secundario" id="limpiar">Limpiar</button>
+          <button class="primario" id="calcular">Calcular</button>
+        </div>
+        <p class="error" id="error"></p>
+      </section>
+
+      <section class="bloque">
+        <h3>Resultado</h3>
+        <ul class="datos">
+          <li><span>Centro</span><b id="d-centro">—</b></li>
+          <li><span>Rx</span><b id="d-rx">—</b></li>
+          <li><span>Ry</span><b id="d-ry">—</b></li>
+          <li><span>Área (π·Rx·Ry)</span><b id="d-area">—</b></li>
+          <li><span>Perímetro (aprox.)</span><b id="d-perimetro">—</b></li>
+          <li><span>Puntos del contorno</span><b id="d-puntos">—</b></li>
+          <li><span>Filas rellenadas</span><b id="d-filas">—</b></li>
+          <li><span>Píxeles rellenados</span><b id="d-pix">—</b></li>
+          <li><span>Iteraciones</span><b id="d-iter">—</b></li>
+        </ul>
+      </section>
+
+      <section class="bloque tabla-bloque">
+        <h3>Puntos calculados</h3>
+        <div class="tabla-scroll">
+          <table>
+            <thead><tr><th>#</th><th>X</th><th>Y</th></tr></thead>
+            <tbody id="tabla"></tbody>
+          </table>
+        </div>
+      </section>
+
+    </aside>
+  </div>
+</div>
+<script src="app.js"></script>
+</body>
+</html>
